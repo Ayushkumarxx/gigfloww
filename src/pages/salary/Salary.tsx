@@ -140,18 +140,18 @@ const Salary: React.FC = () => {
               </div>
 
               {/* Keeping filter dropdown separate for clarity and better alignment */}
-              <div className="relative w-full sm:w-auto">
-                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <div className="relative w-full max-w-xs sm:max-w-sm">
+                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                 <select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="appearance-none border border-black/15 rounded-xl shadow-sm pl-10 pr-8 py-2.5 text-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="appearance-none w-full border border-black/15 rounded-xl shadow-sm pl-10 pr-8 py-2.5 text-md focus:outline-none focus:ring-1 focus:ring-blue-500 truncate"
                 >
                   <option value="">Filter</option>
                   <option value="Paid">Paid</option>
                   <option value="Pending">Pending</option>
                 </select>
-                <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
               </div>
             </div>
 
