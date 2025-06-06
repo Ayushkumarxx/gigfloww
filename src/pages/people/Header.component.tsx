@@ -1,63 +1,42 @@
+// Header.tsx
+
 import React, { useState } from "react";
 import { Search, ChevronDown, Check, SlidersHorizontal } from "lucide-react";
 import { CiExport } from "react-icons/ci";
 
 interface HeaderProps {
-  onExport: () => void;
-  onFilter: (filters: FilterOptions) => void;
+  onExport: () => void; // why: allows parent to trigger export logic externally
+  onFilter: (filters: FilterOptions) => void; // why: allows parent to receive updated filter state
 }
 
 interface FilterOptions {
-  searchTerm: string;
-  type: string;
-  role: string;
-  department?: string;
-  status?: string;
+  searchTerm: string; // why: used to filter data based on input text
+  type: string;       // why: filter based on employment type (e.g., Active/Inactive)
+  role: string;       // why: filter based on job role
+  department?: string; // why: filter based on department (Advanced Filter)
+  status?: string;     // why: filter based on user status (Advanced Filter)
 }
 
+// why: predefined filter options to be rendered in dropdowns
 const TYPES = ["Active", "Inactive"];
-const ROLES = [
-  "Software Engineer",
-  "Visual Designer",
-  "UI/UX Designer",
-  "Content Writer",
-  "Sales Manager",
-  "Mobile Assistant",
-  "Product Manager",
-  "Data Analyst",
-  "DevOps Engineer",
-  "Marketing Manager",
-  "Frontend Developer",
-  "HR Specialist",
-  "Backend Developer",
-  "QA Engineer",
-  "Project Manager",
-  "UX Researcher",
-  "Systems Administrator",
-  "Business Analyst",
-  "Security Specialist",
-  "Content Strategist",
-  "Mobile Developer",
+const ROLES = [ /* ...job roles... */ 
+  "Software Engineer", "Visual Designer", "UI/UX Designer", "Content Writer", "Sales Manager",
+  "Mobile Assistant", "Product Manager", "Data Analyst", "DevOps Engineer", "Marketing Manager",
+  "Frontend Developer", "HR Specialist", "Backend Developer", "QA Engineer", "Project Manager",
+  "UX Researcher", "Systems Administrator", "Business Analyst", "Security Specialist",
+  "Content Strategist", "Mobile Developer"
 ];
-const DEPARTMENTS = [
-  "Engineering",
-  "Design",
-  "Content",
-  "Operation",
-  "Product",
-  "Analytics",
-  "Marketing",
-  "Human Resources",
-  "Quality Assurance",
-  "IT",
-  "Business",
-  "Security",
+const DEPARTMENTS = [ /* ...department list... */ 
+  "Engineering", "Design", "Content", "Operation", "Product", "Analytics", "Marketing",
+  "Human Resources", "Quality Assurance", "IT", "Business", "Security"
 ];
-
 const STATUS = ["Active", "Inactive"];
 
 const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
+  // why: local state to control search input value
   const [searchTerm, setSearchTerm] = useState("");
+
+  // why: stores the current filter values selected by the user
   const [filters, setFilters] = useState<FilterOptions>({
     searchTerm: "",
     type: "",
@@ -66,12 +45,14 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
     status: "",
   });
 
+  // why: manages visibility of dropdowns (only one opens at a time)
   const [dropdownOpen, setDropdownOpen] = useState({
     type: false,
     role: false,
     advanced: false,
   });
 
+  // why: updates search term and triggers filtering
   const handelSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     const updatedFilters = { ...filters, searchTerm: e.target.value };
@@ -79,6 +60,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
     onFilter(updatedFilters);
   };
 
+  // why: toggles the open state of a specific dropdown
   const toggleDropdown = (field: keyof typeof dropdownOpen) => {
     setDropdownOpen((prev) => ({
       type: false,
@@ -88,6 +70,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
     }));
   };
 
+  // why: handles item selection for any filter and resets other related filters
   const handleSelect = (field: keyof FilterOptions, value: string) => {
     const isSame = filters[field] === value;
     const updatedFilters = {
@@ -102,9 +85,10 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
   };
 
   return (
-    <div className="flex justify-between items-center my-8">
-      <div className="flex items-center gap-4">
-        {/* Search Bar */}
+    <div className="flex flex-wrap justify-between items-center my-8">
+      <div className="flex flex-wrap items-center gap-4">
+
+        {/* why: renders the input field for searching records */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
@@ -116,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
           />
         </div>
 
-        {/* Type Dropdown */}
+        {/* why: renders dropdown for filtering by Type */}
         <div className="relative">
           <button
             onClick={() => toggleDropdown("type")}
@@ -150,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
           )}
         </div>
 
-        {/* Role Dropdown */}
+        {/* why: renders dropdown for filtering by Role */}
         <div className="relative">
           <button
             onClick={() => toggleDropdown("role")}
@@ -184,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
           )}
         </div>
 
-        {/* Advanced Filter Dropdown */}
+        {/* why: renders advanced filter for department and status */}
         <div className="relative">
           <button
             onClick={() => toggleDropdown("advanced")}
@@ -196,7 +180,8 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
           </button>
           {dropdownOpen.advanced && (
             <div className="absolute z-10 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-72">
-              {/* Department */}
+
+              {/* why: renders department selection */}
               <div className="mb-4">
                 <label className="text-sm font-semibold">Department</label>
                 <div className="mt-1">
@@ -219,7 +204,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
                 </div>
               </div>
 
-              {/* Status */}
+              {/* why: renders status selection */}
               <div className="mb-4">
                 <label className="text-sm font-semibold">Status</label>
                 <div className="mt-1">
@@ -246,7 +231,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
         </div>
       </div>
 
-      {/* Export Button */}
+      {/* why: triggers the export logic passed from the parent component */}
       <button
         onClick={onExport}
         className="flex items-center text-xl gap-2 px-4 py-2 font-semibold text-gray-700 hover:bg-gray-50 rounded-lg cursor-pointer"
