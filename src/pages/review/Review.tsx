@@ -3,6 +3,7 @@ import Components from '../../shared/components/export'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Star } from 'lucide-react'
+import { TOAST_MESSAGES, REVIEW_PAGE_TEXT, STAR_COUNT } from '../../utils/const/review.constants'
 
 const Review: React.FC = () => {
   const [rating, setRating] = useState(0)
@@ -11,10 +12,10 @@ const Review: React.FC = () => {
 
   const handleSubmit = () => {
     if (rating === 0 || reviewText.trim() === '') {
-      toast.error('Please provide a rating and review.')
+      toast.error(TOAST_MESSAGES.ERROR)
       return
     }
-    toast.success('Review submitted successfully!')
+    toast.success(TOAST_MESSAGES.SUCCESS)
     setRating(0)
     setReviewText('')
   }
@@ -24,11 +25,13 @@ const Review: React.FC = () => {
       <Components.navbar />
       <ToastContainer position="top-center" />
       <div className="max-w-xl mx-auto  p-6 mt-10 border border-black/15 rounded-xl shadow-sm">
-        <h2 className="text-2xl font-semibold text-center mb-4">Leave a Review</h2>
+        <h2 className="text-2xl font-semibold text-center mb-4">
+          {REVIEW_PAGE_TEXT.TITLE}
+        </h2>
 
         {/* Star Rating */}
         <div className="flex justify-center mb-4">
-          {[1, 2, 3, 4, 5].map((star) => (
+          {STAR_COUNT.map((star) => (
             <Star
               key={star}
               className={`w-8 h-8 cursor-pointer transition-colors ${
@@ -45,7 +48,7 @@ const Review: React.FC = () => {
         {/* Review Input */}
         <textarea
           className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Write your review here..."
+          placeholder={REVIEW_PAGE_TEXT.PLACEHOLDER}
           rows={4}
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}
@@ -56,7 +59,7 @@ const Review: React.FC = () => {
           className="mt-4 w-full bg-gradient-to-r from-[#2784B8] to-[#113B52] hover:bg-[#1f6b96] text-white font-medium py-2 rounded-md transition"
           onClick={handleSubmit}
         >
-          Submit Review
+          {REVIEW_PAGE_TEXT.SUBMIT}
         </button>
       </div>
     </>

@@ -6,90 +6,14 @@ import { ChevronDown, Filter, Search } from "lucide-react";
 import TableRow from "./TableRow.component";
 import ProfileCard from "./ProfileCard.component";
 
-type Status = "Paid" | "Pending";
-
-interface Employee {
-  id: number;
-  name: string;
-  email: string;
-  jobTitle: string;
-  department: string;
-  netSalary: number;
-  status: Status;
-}
-
-// Mock data used for display before connecting real API
-const mockEmployees: Employee[] = [
-  {
-    id: 1,
-    name: "Alicia Shankur",
-    email: "alicia.shankur@gmail.com",
-    jobTitle: "Software Engineer",
-    department: "Engineering",
-    netSalary: 2500,
-    status: "Paid",
-  },
-  {
-    id: 2,
-    name: "James Oyinkan",
-    email: "james.oyinkan@gmail.com",
-    jobTitle: "Visual Designer",
-    department: "Design",
-    netSalary: 2100,
-    status: "Paid",
-  },
-  {
-    id: 3,
-    name: "Aresen Vlamedir",
-    email: "aresen.vlamedir@gmail.com",
-    jobTitle: "Sales Manager",
-    department: "Product",
-    netSalary: 4700,
-    status: "Pending",
-  },
-  {
-    id: 4,
-    name: "Kito Ashuth",
-    email: "kito.ashuth@gmail.com",
-    jobTitle: "Content Writer",
-    department: "Content",
-    netSalary: 2000,
-    status: "Paid",
-  },
-  {
-    id: 5,
-    name: "Diti Shreyas",
-    email: "diti.shreyas@gmail.com",
-    jobTitle: "Backend Engineer",
-    department: "Engineering",
-    netSalary: 2500,
-    status: "Paid",
-  },
-  {
-    id: 6,
-    name: "Alicia Shankur",
-    email: "alicia.shankur@gmail.com",
-    jobTitle: "Product Manager",
-    department: "Product",
-    netSalary: 4100,
-    status: "Pending",
-  },
-  {
-    id: 7,
-    name: "Dario Berik",
-    email: "dario.berik@gmail.com",
-    jobTitle: "Software Engineer",
-    department: "Engineering",
-    netSalary: 1900,
-    status: "Paid",
-  },
-];
+import { mockEmployees, STATUS_FILTER_OPTIONS } from "../../utils/const/salary.constants";
+import type { Employee } from "../../utils/types/salary.types";
 
 const Salary: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState("May 2025");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
-  const [selectedEmployee, setSelectedEmployee] = useState(mockEmployees[1]);
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee>(mockEmployees[1]);
 
   // ✅ Filtering logic is memoized to avoid unnecessary recomputation on each render
   const filteredEmployees = useMemo(() => {
@@ -147,9 +71,11 @@ const Salary: React.FC = () => {
                   onChange={(e) => setFilterStatus(e.target.value)}
                   className="appearance-none w-full border border-black/15 rounded-xl shadow-sm pl-10 pr-8 py-2.5 text-md focus:outline-none focus:ring-1 focus:ring-blue-500 truncate"
                 >
-                  <option value="">Filter</option>
-                  <option value="Paid">Paid</option>
-                  <option value="Pending">Pending</option>
+                  {STATUS_FILTER_OPTIONS.map(({ label, value }) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
               </div>
