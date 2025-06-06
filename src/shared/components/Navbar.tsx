@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
     >
       <div className="flex items-center justify-between h-16 lg:h-20 px-4 sm:px-6">
         {/* Why: Brand/logo section for visual identity */}
-        <div className="flex h-[30px] gap-4 items-center">
+        <div className="flex h-[30px] gap-2 lg:gap-4 items-center">
           <img src={Assets.onlyLogo} alt="logo" className="w-[30px] h-[30px]" />
           <div className="text-[18px] sm:text-[20px] lg:text-[24px] text-white font-bold">
             GIGFLOWW
@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
 
         {/* Why: Right-side control section (settings, notifications, profile, mobile menu) */}
         <div className="flex items-center space-x-3">
-          <button className="flex p-2 text-[#2784B8] bg-white hover:bg-white/90 rounded-full transition-colors duration-200">
+          <button className="hidden md:flex p-2 text-[#2784B8] bg-white hover:bg-white/90 rounded-full transition-colors duration-200">
             <Settings className="w-5 h-5" />
           </button>
 
