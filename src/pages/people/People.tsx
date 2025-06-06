@@ -365,7 +365,7 @@ const People: React.FC = () => {
         <div className="flex justify-between items-center mt-10">
           <h1 className="text-2xl lg:text-3xl font-semibold">List of people</h1>
 
-          <div className="flex h-[50px] px-8 items-center shadow-sm rounded-lg cursor-pointer bg-gradient-to-r from-[#2784B8] to-[#113B52] hover:bg-[#1f6b96] text-white font-medium">
+          <div className="flex h-[50px] px-4 lg:px-8 text-[14px] items-center shadow-sm rounded-lg cursor-pointer bg-gradient-to-r from-[#2784B8] to-[#113B52] hover:bg-[#1f6b96] text-white font-medium">
             Add new member
           </div>
         </div>
