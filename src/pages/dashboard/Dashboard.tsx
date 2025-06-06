@@ -116,7 +116,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="flex justify-between items-center mt-10">
-          <h1 className="text-2xl lg:text-3xl font-semibold">
+          <h1 className="text-xl lg:text-3xl font-semibold">
             Welcome Back, Nuraj group
           </h1>
 
