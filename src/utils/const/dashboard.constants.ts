@@ -10,7 +10,7 @@ export const INFO_CARD_DATA = [
     iconColor: "#2C1336",
     iconBg: "#EED3EF",
     linkText: "View Details",
-    linkTo: "/employees",
+    linkTo: "/people",
   },
   {
     title: "Hiring",
@@ -19,7 +19,7 @@ export const INFO_CARD_DATA = [
     iconColor: "#21729F",
     iconBg: "#D3E3EF",
     linkText: "View Details",
-    linkTo: "/employees",
+    linkTo: "/hiring",
   },
   {
     title: "Projects",
@@ -28,7 +28,7 @@ export const INFO_CARD_DATA = [
     iconColor: "#13361C",
     iconBg: "#E3EFD3",
     linkText: "View Details",
-    linkTo: "/employees",
+    linkTo: "/",
   },
 ];
 

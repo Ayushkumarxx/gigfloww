@@ -11,24 +11,50 @@ interface HeaderProps {
 
 interface FilterOptions {
   searchTerm: string; // why: used to filter data based on input text
-  type: string;       // why: filter based on employment type (e.g., Active/Inactive)
-  role: string;       // why: filter based on job role
+  type: string; // why: filter based on employment type (e.g., Active/Inactive)
+  role: string; // why: filter based on job role
   department?: string; // why: filter based on department (Advanced Filter)
-  status?: string;     // why: filter based on user status (Advanced Filter)
+  status?: string; // why: filter based on user status (Advanced Filter)
 }
 
 // why: predefined filter options to be rendered in dropdowns
 const TYPES = ["Active", "Inactive"];
-const ROLES = [ /* ...job roles... */ 
-  "Software Engineer", "Visual Designer", "UI/UX Designer", "Content Writer", "Sales Manager",
-  "Mobile Assistant", "Product Manager", "Data Analyst", "DevOps Engineer", "Marketing Manager",
-  "Frontend Developer", "HR Specialist", "Backend Developer", "QA Engineer", "Project Manager",
-  "UX Researcher", "Systems Administrator", "Business Analyst", "Security Specialist",
-  "Content Strategist", "Mobile Developer"
+const ROLES = [
+  "Software Engineer",
+  "Visual Designer",
+  "UI/UX Designer",
+  "Content Writer",
+  "Sales Manager",
+  "Mobile Assistant",
+  "Product Manager",
+  "Data Analyst",
+  "DevOps Engineer",
+  "Marketing Manager",
+  "Frontend Developer",
+  "HR Specialist",
+  "Backend Developer",
+  "QA Engineer",
+  "Project Manager",
+  "UX Researcher",
+  "Systems Administrator",
+  "Business Analyst",
+  "Security Specialist",
+  "Content Strategist",
+  "Mobile Developer",
 ];
-const DEPARTMENTS = [ /* ...department list... */ 
-  "Engineering", "Design", "Content", "Operation", "Product", "Analytics", "Marketing",
-  "Human Resources", "Quality Assurance", "IT", "Business", "Security"
+const DEPARTMENTS = [
+  /* ...department list... */ "Engineering",
+  "Design",
+  "Content",
+  "Operation",
+  "Product",
+  "Analytics",
+  "Marketing",
+  "Human Resources",
+  "Quality Assurance",
+  "IT",
+  "Business",
+  "Security",
 ];
 const STATUS = ["Active", "Inactive"];
 
@@ -87,7 +113,6 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
   return (
     <div className="flex flex-wrap justify-between items-center my-8">
       <div className="flex flex-wrap items-center gap-4">
-
         {/* why: renders the input field for searching records */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -107,7 +132,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
             className="flex items-center gap-2 px-4 py-2 border border-black/15 rounded-xl shadow-sm text-gray-700 hover:bg-gray-50 font-[500] text-[16px]"
           >
             {filters.type || "Type"}
-            <ChevronDown />
+            <ChevronDown className={`transition-transform ${dropdownOpen.type ? "rotate-180" : ""}`} />
           </button>
           {dropdownOpen.type && (
             <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
@@ -141,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
             className="flex items-center gap-2 px-4 py-2 border border-black/15 rounded-xl shadow-sm text-gray-700 hover:bg-gray-50 font-[500] text-[16px]"
           >
             {filters.role || "Role"}
-            <ChevronDown />
+              <ChevronDown className={`transition-transform ${dropdownOpen.role ? "rotate-180" : ""}`} />
           </button>
           {dropdownOpen.role && (
             <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto overflow-x-hidden">
@@ -176,11 +201,10 @@ const Header: React.FC<HeaderProps> = ({ onExport, onFilter }) => {
           >
             <SlidersHorizontal />
             Advanced Filter
-            <ChevronDown />
+             <ChevronDown className={`transition-transform ${dropdownOpen.advanced ? "rotate-180" : ""}`} />
           </button>
           {dropdownOpen.advanced && (
             <div className="absolute z-10 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-72">
-
               {/* why: renders department selection */}
               <div className="mb-4">
                 <label className="text-sm font-semibold">Department</label>
