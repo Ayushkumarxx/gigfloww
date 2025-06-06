@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import Layouts from "../../shared/layout/export";
 import Assets from "../../assets/export";
+import { useNavigate } from "react-router-dom";
+
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,16 +25,18 @@ const Auth: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    if (isLogin) {
-      console.log("Login data:", {
-        email: formData.email,
-        password: formData.password,
-      });
-      // Handle login logic here
-    } else {
-      console.log("Signup data:", formData);
-      // Handle signup logic here
-    }
+ if (isLogin) {
+    console.log("Login data:", {
+      email: formData.email,
+      password: formData.password,
+    });
+    // Handle login logic here (add validation or API call)
+    navigate("/dashboard"); //  redirect to dashboard
+  } else {
+    console.log("Signup data:", formData);
+    // Handle signup logic here
+    navigate("/dashboard"); //  redirect to dashboard
+  }
   };
 
   const toggleMode = () => {
